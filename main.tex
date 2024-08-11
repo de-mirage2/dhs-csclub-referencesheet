@@ -1,0 +1,36 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs}
+\usepackage{xcolor,listings,realboxes}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
+%\usepackage{pgfplots}
+
+\definecolor{dhsblue}{HTML}{05065D}
+\definecolor{dhsred}{HTML}{AD1229}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{white},   
+    commentstyle=\color{green},
+    keywordstyle=\color{dhsred},
+    numberstyle=\tiny,
+    stringstyle=\color{dhsblue},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbersep=5pt,                  
+    tabsize=2,
+    numbers=left
+}
+
+% https://www.overleaf.com/learn/latex/Code_listing
+
+\begin{document}
+   \begin{lstlisting}[caption="Go Vikes!", language=java]
+     import java.util.io;
+
+     public static void main(String args[]) {
+       System.out.println("Go Vikes!");
+     }
+  \end{lstlisting}
+\end{document}
