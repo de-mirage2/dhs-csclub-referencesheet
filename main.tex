@@ -1,36 +1,78 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs}
 \usepackage{xcolor,listings,realboxes}
+\usepackage{courier}
+\usepackage{lipsum}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
 %\usepackage{pgfplots}
 
-\definecolor{dhsblue}{HTML}{05065D}
-\definecolor{dhsred}{HTML}{AD1229}
+\definecolor{vb-red}{HTML}{D05353}
+\definecolor{vb-blue}{HTML}{464D77}
+\definecolor{vb-white}{HTML}{F1ECCE}
+\definecolor{vb-sky}{HTML}{9FC2CC}
 
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{white},   
+    backgroundcolor=\color{vb-white},   
     commentstyle=\color{green},
-    keywordstyle=\color{dhsred},
-    numberstyle=\tiny,
-    stringstyle=\color{dhsblue},
-    basicstyle=\ttfamily\footnotesize,
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbersep=5pt,                  
+    keywordstyle=\color{vb-red},
+    stringstyle=\color{vb-blue},
+    basicstyle=\footnotesize\ttfamily,
+    numberstyle=\ttfamily,
+    breaklines=true,       
+    captionpos=b, 
+    keepspaces=true, 
+    numbersep=5pt, 
     tabsize=2,
-    numbers=left
+    numbers=left,
+    frame=tBlR,
+    showstringspaces=false,
+    rulesepcolor=\color{vb-sky}
 }
+
+\lstset{style=mystyle}
 
 % https://www.overleaf.com/learn/latex/Code_listing
 
-\begin{document}
-   \begin{lstlisting}[caption="Go Vikes!", language=java]
-     import java.util.io;
+%%%%%%%%
+%%%%%%%%
+%%%%%%%%
 
-     public static void main(String args[]) {
-       System.out.println("Go Vikes!");
-     }
-  \end{lstlisting}
+%TODO: Primitive ranges (how long is a long), Order of operations
+
+
+\title{Dulles High School CS Club\\Official Reference Sheet}
+\date{\today}
+\author{Miraj Parikh, Austin Song}
+
+\begin{document}
+
+\lstinputlisting[language=Java]{govikes.java}
+{\let\newpage\relax\maketitle} % snippet to maketitle w/out prefixing page
+
+\section{Primitive Data Types}
+\setlength{\tabcolsep}{15pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{center}\begin{tabular}{lll}\toprule
+  Name          & Initialization & Range \\\midrule
+  Boolean       & \lstinline|bool x| & True/False \\
+  Character     & \lstinline|char x| & \([-2^{7}, 2^7-1] = [-128, 127]\) \\
+                & \lstinline|unsigned char x| & \([0, 2^8-1] = [0, 255]\) \\
+  Byte          & \lstinline|byte x| & \([-2^{7}, 2^7-1] = [-128, 127]\) \\
+                & \lstinline|unsigned byte x| & \([0, 2^8-1] = [0, 255]\) \\
+\end{tabular}\end{center}
+\section{Order of Operations}
+\section{shits and giggles}
+\subsection{Alma Mater}
+Dulles High we pledge to you, We’ll be loyal;
+
+We’ll be true.  May we always bring you honor,
+
+Glory and acclaim.  As each year goes passing by,
+
+We will keep your banner high.  Hail to you –
+
+RED, WHITE, and BLUE Praise your exalted name.
+
 \end{document}
