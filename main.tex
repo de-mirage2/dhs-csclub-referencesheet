@@ -1,6 +1,7 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[letterpaper,margin=1in]{geometry}
-\usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed,booktabs}
+\usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed}
+\usepackage{multirow,booktabs,tabularx}
 \usepackage{xcolor,listings,realboxes}
 \usepackage{courier}
 \usepackage{lipsum}
@@ -51,18 +52,61 @@
 \lstinputlisting[language=Java]{govikes.java}
 {\let\newpage\relax\maketitle} % snippet to maketitle w/out prefixing page
 
-\section{Primitive Data Types}
-\setlength{\tabcolsep}{15pt}
 \renewcommand{\arraystretch}{1.25}
-\begin{center}\begin{tabular}{lll}\toprule
-  Name          & Initialization & Range \\\midrule
-  Boolean       & \lstinline|bool x| & True/False \\
-  Character     & \lstinline|char x| & \([-2^{7}, 2^7-1] = [-128, 127]\) \\
-                & \lstinline|unsigned char x| & \([0, 2^8-1] = [0, 255]\) \\
-  Byte          & \lstinline|byte x| & \([-2^{7}, 2^7-1] = [-128, 127]\) \\
-                & \lstinline|unsigned byte x| & \([0, 2^8-1] = [0, 255]\) \\
+\section{Primitive Data Types}
+\begin{center}\begin{tabular}{llrr}\toprule
+  Name          & Initialization              & Range (Java) & Range (C-family) \\\midrule
+  Boolean       & \lstinline|bool x|          & True/False & --\\\midrule
+  Character     & \lstinline|signed char x|   & \(-32768 \leq x < 32768\) & \(-128 \leq x < 128\) \\ 
+  Default Char. & \lstinline|char x|          & \(0 \leq x < 65536\) & \(0 \leq x < 256\) \\
+  Byte          & \lstinline|byte x|          & \(-128 \leq x < 128\) & -- \\
+                & \lstinline|unsigned byte x| & \(0 \leq x < 256\) & -- \\
+  Short         & \lstinline|short x|         & \(-32768 \leq x < 32768\) & -- \\
+                & \lstinline|unsigned short x|& \(0 \leq x < 65536\) & -- \\
+  Integer       & \lstinline|int x|           & \(-2147483648 \leq x < 2147483648\) & -- \\
+                & \lstinline|unsigned int x|  & \(0 \leq x < 4294967295\) & -- \\
 \end{tabular}\end{center}
-\section{Order of Operations}
+
+\setlength{\tabcolsep}{1pt}
+\renewcommand{\arraystretch}{1}
+\section{Order of Operations} % Credit: Princeton University CS
+By descending priority: 
+\begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
+  Level               & \quad Name        & Operator          & Direction & \qquad Description \\\midrule
+  \multirow{4}{*}{16} & Parentheses       & \lstinline|(x)|   & \multirow{4}{*}{\(\rightarrow\)}& Groups code together \\
+                      & Array Access      & \lstinline|x[y]|  & & Access element indexed at \lstinline|int y| of an array \lstinline|x[]|\\
+                      & Object Creation   & \lstinline|new|   & & Keyword allowing creation of a new object\\
+                      & Member Access     & \lstinline|x.y|   & & Allows member \lstinline|y| to be accessed from parent \lstinline|x| \\ \midrule
+  \multirow{2}{*}{15} & U. Post-Increment & \lstinline|x++|   & \multirow{2}{*}{\(\rightarrow\)} & Return the value of \lstinline|int x| before the increment \\
+                      & U. Post-Decrement & \lstinline|x--|   & & Returns the value of \lstinline|int x| before the decrement\\\midrule
+  \multirow{6}{*}{14} & U. Plus           & \lstinline|+x|    & \multirow{6}{*}{\(\leftarrow\)} & Returns the value of \lstinline|int x|\\
+                      & U. Minus          & \lstinline|-x|    & & Returns the negative value of \lstinline|int x| \\
+                      & U. L. NOT         & \lstinline|-x|    & & Returns the value of \lstinline|bool x| after flipping it \\
+                      & U. B. NOT         & \lstinline|-x|    & & Returns the value of \lstinline|int x| after flipping each bit\\
+                      & U. Pre-Increment  & \lstinline|++x|   & & Increments before returning the value of \lstinline|int x| \\
+                      & U. Pre-Decrement  & \lstinline|--x|   & & Decrements before returning the value of \lstinline|int x| \\\midrule
+                  13  & Cast              & \lstinline|(y) x| & \(\leftarrow\) & Casts variable \lstinline|x| to type \lstinline|y| \\\midrule
+                  12  & Multiplicative    & \parbox[c]{1cm}{\centering\lstinline|x * y|\\\lstinline|x / y|\\\lstinline|x \% y|} & \(\rightarrow\) & \\\midrule
+                  11  & Additive          & \lstinline|x + y| or \lstinline|x - y| & \(\rightarrow\) & Includes string concatenation \\\midrule
+                  10  & Bitshift          & \parbox[c]{1.5cm}{\centering\lstinline|x >> y|\\\lstinline|x << y|\\\lstinline|x >>> y|} & \(\rightarrow\) & \\\midrule
+                  9   & Relational        & \parbox[c]{1.5cm}{\centering\lstinline|x < y|\\\lstinline|x <= y|\\\lstinline|x >= y|\\\lstinline|x > y|} & \(\rightarrow\) & \\\midrule
+                  8   & Equality          & \parbox[c]{1.5cm}{\centering\lstinline|x = y|\\\lstinline|x != y|} & \(\rightarrow\) & \\\midrule
+                  7   & B. AND            & \lstinline|x \& y|    & \(\rightarrow\) & \\\midrule
+                  6   & B. XOR            & \lstinline|x \^ y|    & \(\rightarrow\) & \\\midrule
+                  5   & B. OR             & \lstinline+x | y+     & \(\rightarrow\) & \\\midrule
+                  4   & L. AND            & \lstinline|x \&\& y|  & \(\rightarrow\) & \\\midrule
+                  3   & L. OR             & \lstinline+x || y+    & \(\rightarrow\) & \\\midrule
+                  2   & Ternary           & \lstinline|x ? y : z| & \(\leftarrow\) & \\\midrule
+                  1   & Assignment        & \lstinline!x = y!     & \(\leftarrow\) & Includes all compound assignment operators \\\midrule
+                  0   & Lambda / Switch   & \lstinline|x -> y|    & \(\leftarrow\) & \\\bottomrule
+\end{tabularx}\end{center}
+U. \quad Unary - Operator deals with one single argument \\
+L. \quad Logical - Operator deals with booleans and true/false values \\
+B. \quad Bitwise - Operator manipulates bits of primitive data types\\
+\\
+\(^J\) - Java-Exclusive \quad \(^C\) - C-Family-Exclusive \quad \(^P\) - Python-Exclusive
+
+
 \section{shits and giggles}
 \subsection{Alma Mater}
 Dulles High we pledge to you, We’ll be loyal;
