@@ -52,7 +52,7 @@
 \lstinputlisting[language=Java]{govikes.java}
 {\let\newpage\relax\maketitle} % snippet to maketitle w/out prefixing page
 
-\renewcommand{\arraystretch}{1.25}
+\renewcommand{\arraystretch}{1.25} % it hurts the eyes to keep numbers close together
 \section{Primitive Data Types}
 \begin{center}\begin{tabular}{llrr}\toprule
   Name            & Initialization              & Range (Java) & Range (C-family) \\\midrule
@@ -69,7 +69,7 @@
 
 \setlength{\tabcolsep}{1pt}
 \renewcommand{\arraystretch}{1}
-\section{Order of Operations} % Credit: Princeton University CS
+\section{Order of Operations} 
 By descending priority: 
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
   Level               & \quad Name        & Operator          & Direction & \qquad Description \\\midrule
@@ -88,7 +88,7 @@ By descending priority:
                   13  & Cast              & \lstinline|(y) x| & \(\leftarrow\) & Casts variable \lstinline|x| to type \lstinline|y| \\\midrule
                   12  & Multiplicative    & \parbox[c]{1cm}{\centering\lstinline|x * y|\\\lstinline|x / y|\\\lstinline|x \% y|} & \(\rightarrow\) & \\\midrule
                   11  & Additive          & \lstinline|x + y| or \lstinline|x - y| & \(\rightarrow\) & Includes string concatenation \\\midrule
-                  10  & Bitshift          & \parbox[c]{1.5cm}{\centering\lstinline|x >> y|\\\lstinline|x << y|\\\lstinline|x >>> y|} & \(\rightarrow\) & \\\midrule
+                  10  & Bitshift          & \parbox[c]{1.5cm}{\centering\lstinline|x >> y|\\\lstinline|x << y|\\\lstinline|x >>> y|} & \(\rightarrow\) & Shifts binary expression of \lstinline|int x| by \lstinline|int y| bits\\\midrule
                   9   & Relational        & \parbox[c]{1.5cm}{\centering\lstinline|x < y|\\\lstinline|x <= y|\\\lstinline|x >= y|\\\lstinline|x > y|} & \(\rightarrow\) & \\\midrule
                   8   & Equality          & \parbox[c]{1.5cm}{\centering\lstinline|x = y|\\\lstinline|x != y|} & \(\rightarrow\) & \\\midrule
                   7   & B. AND            & \lstinline|x \& y|    & \(\rightarrow\) & \\\midrule
@@ -100,12 +100,31 @@ By descending priority:
                   1   & Assignment        & \lstinline!x = y!     & \(\leftarrow\) & Includes all compound assignment operators \\\midrule
                   0   & Lambda / Switch   & \lstinline|x -> y|    & \(\leftarrow\) & \\\bottomrule
 \end{tabularx}\end{center}
-U. \quad Unary - Operator deals with one single argument \\
-L. \quad Logical - Operator deals with booleans and true/false values \\
-B. \quad Bitwise - Operator manipulates bits of primitive data types\\
-\\
-\(^J\) - Java-Exclusive \quad \(^C\) - C-Family-Exclusive \quad \(^P\) - Python-Exclusive
 
+U. \quad Unary - Operator deals with one single argument
+
+L. \quad Logical - Operator deals with booleans and true/false values
+
+B. \quad Bitwise - Operator manipulates bits of primitive data types
+
+\(J\) - Java-Exclusive \quad \(C\) - C-Family-Exclusive \quad \(P\) - Python-Exclusive
+
+\section{Containers}
+\subsection{Data Structures}
+Note that any value related to an index, \lstinline|int i|, for these intents and purposes cannot be negative; It would be more appropriate to interpret as \lstinline|unsigned int i|. 
+\setlength{\tabcolsep}{5pt}
+\begin{center}\begin{tabularx}{\textwidth}{lX}\toprule
+  Name & Initialization, Methods, Properties\\
+  \multirow{3}{*}{Array} & \lstinline|Type[] x = new Type[int i];| \\
+                         & \lstinline|int i -> x.length| \\
+                         & \lstinline|x[int j] = Type z;| \\\midrule
+  \multirow{5}{*}{\lstinline|ArrayList|} & \lstinline|ArrayList<Type> x = new ArrayList<Type>();| \\
+                                         & \lstinline|x.add(Type y)| or \lstinline|x.add(int i, Type y)|\\
+                                         & \lstinline|x.remove(int i)| \\
+                                         & \lstinline|x.clear()| \\
+                                         & \lstinline|boolean x.isEmpty()| \\
+  \multirow{4}{*}{\lstinline|HashMap|} & \lstinline|HashMap| \\
+\end{tabularx}\end{center}
 
 %\section{shits and giggles}
 %\subsection{Alma Mater}
