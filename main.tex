@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass{article}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed}
 \usepackage{multirow,booktabs,tabularx}
@@ -43,9 +43,9 @@
 %TODO: Primitive ranges (how long is a long), Order of operations
 
 
-\title{Dulles High School CS Club\\Official Reference Sheet}
+\title{Dulles VikeBytes\\Official Reference Sheet}
 \date{\today}
-\author{Miraj Parikh, Austin Song}
+\author{Dulles CS Club \and Dulles GirlBytes}
 
 \begin{document}
 
@@ -53,26 +53,44 @@
 {\let\newpage\relax\maketitle} % snippet to maketitle w/out prefixing page
 
 \renewcommand{\arraystretch}{1.25} % it hurts the eyes to keep numbers close together
-\section{Primitive Data Types}
-\begin{center}\begin{tabular}{llrr}\toprule
-  Name            & Initialization              & Range (Java) & Range (C-family) \\\midrule
-  Boolean         & \lstinline|bool x|          & True/False & --\\\midrule
-  Character & \lstinline|signed char x|   & \(-32768 \leq x < 32768\) & \(-128 \leq x < 128\) \\ 
-  Character & \lstinline|unsigned char x|          & \(0 \leq x < 65536\) & \(0 \leq x < 256\) \\
-  Byte            & \lstinline|byte x|          & \(-128 \leq x < 128\) & -- \\
-                  & \lstinline|unsigned byte x| & \(0 \leq x < 256\) & -- \\
-  Short           & \lstinline|short x|         & \(-32768 \leq x < 32768\) & -- \\
-                  & \lstinline|unsigned short x|& \(0 \leq x < 65536\) & -- \\
-  Integer         & \lstinline|int x|           & \(-2147483648 \leq x < 2147483648\) & -- \\
-                  & \lstinline|unsigned int x|  & \(0 \leq x < 4294967295\) & -- \\
-\end{tabular}\end{center}
+\section{Primitive Data Types (Java)}
+\begin{center}\begin{tabular}{lllr}\toprule
+  Name      &Size (Bits) &Initialization              &Range \\\midrule
+  Boolean   &1           &\lstinline|bool x|          &True/False \\\midrule
+  Character &16          &\lstinline|signed char x|   &\(-32768 \leq x < 32768\) \\ 
+            &            &\lstinline|unsigned char x| &\(0 \leq x < 65536\) \\
+  Byte      &8           &\lstinline|byte x|          &\(-128 \leq x < 128\) \\
+            &            &\lstinline|unsigned byte x| &\(0 \leq x < 256\) \\
+  Short     &16          &\lstinline|short x|         &\(-32768 \leq x < 32768\) \\
+            &            &\lstinline|unsigned short x|&\(0 \leq x < 65536\) \\
+  Integer   &32          &\lstinline|int x|           &\(-2147483648 \leq x < 2147483648\) \\
+            &            &\lstinline|unsigned int x|  &\(0 \leq x < 4294967295\) \\
+  Long      &64          &\lstinline|long x|          &\(-2^{63} \leq x < 2^{63}\) \\
+            &            &\lstinline|unsigned long x| &\(0 \leq x < 2^{64}\) \\\midrule
+  Float     &32          &\lstinline|float x|         &\(1.5\cdot10^{-45} \leq |x| < 3.4\cdot10^{38}\) \\
+            &            &                            &(6-7 significant digits) \\
+  Double    &32          &\lstinline|double x|        &\(4.9\cdot10^{-324} \leq |x| < 1.7\cdot10^{308}\) \\
+            &            &                            &(15 significant digits) \\
+\bottomrule\end{tabular}\end{center}
 
 \setlength{\tabcolsep}{1pt}
 \renewcommand{\arraystretch}{1}
 \section{Order of Operations} 
-By descending priority: 
+Operators are ordered in descending priority (\textit{Lvl.}) and if affiliate, with their respective markings:
+
+U. (Unary) \dotfill Deals with one single primitive data type argument
+
+C. (Conditional) \dotfill Deals with boolean expressions in if statements
+
+BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending on passed data
+
+\subsection{Python}
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
-  Level               & \quad Name        & Operator          & Direction & \qquad Description \\\midrule
+  Lvl. & \quad Name & Operator & Direction & Description
+\end{tabularx}\end{center}
+\subsection{Java}
+\begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
+  Lvl.                & \quad Name        & Operator          & Direction & \qquad Description \\\midrule
   \multirow{4}{*}{16} & Parentheses       & \lstinline|(x)|   & \multirow{4}{*}{\(\rightarrow\)}& Groups code together \\
                       & Array Access      & \lstinline|x[y]|  & & Access element indexed at \lstinline|int y| of an array \lstinline|x[]|\\
                       & Object Creation   & \lstinline|new|   & & Keyword allowing creation of a new object\\
@@ -81,8 +99,8 @@ By descending priority:
                       & U. Post-Decrement & \lstinline|x--|   & & Returns the value of \lstinline|int x| before the decrement\\\midrule
   \multirow{6}{*}{14} & U. Plus           & \lstinline|+x|    & \multirow{6}{*}{\(\leftarrow\)} & Returns the value of \lstinline|int x|\\
                       & U. Minus          & \lstinline|-x|    & & Returns the negative value of \lstinline|int x| \\
-                      & U. L. NOT         & \lstinline|-x|    & & Returns the value of \lstinline|bool x| after flipping it \\
-                      & U. B. NOT         & \lstinline|-x|    & & Returns the value of \lstinline|int x| after flipping each bit\\
+                      & U. BL. NOT         & \lstinline|-x|    & & Returns the value of \lstinline|int x| after flipping each bit\\
+                      & U. C. NOT         & \lstinline|-x|    & & Returns the value of \lstinline|bool x| after flipping it \\
                       & U. Pre-Increment  & \lstinline|++x|   & & Increments before returning the value of \lstinline|int x| \\
                       & U. Pre-Decrement  & \lstinline|--x|   & & Decrements before returning the value of \lstinline|int x| \\\midrule
                   13  & Cast              & \lstinline|(y) x| & \(\leftarrow\) & Casts variable \lstinline|x| to type \lstinline|y| \\\midrule
@@ -91,27 +109,19 @@ By descending priority:
                   10  & Bitshift          & \parbox[c]{1.5cm}{\centering\lstinline|x >> y|\\\lstinline|x << y|\\\lstinline|x >>> y|} & \(\rightarrow\) & Shifts binary expression of \lstinline|int x| by \lstinline|int y| bits\\\midrule
                   9   & Relational        & \parbox[c]{1.5cm}{\centering\lstinline|x < y|\\\lstinline|x <= y|\\\lstinline|x >= y|\\\lstinline|x > y|} & \(\rightarrow\) & \\\midrule
                   8   & Equality          & \parbox[c]{1.5cm}{\centering\lstinline|x = y|\\\lstinline|x != y|} & \(\rightarrow\) & \\\midrule
-                  7   & B. AND            & \lstinline|x \& y|    & \(\rightarrow\) & \\\midrule
-                  6   & B. XOR            & \lstinline|x \^ y|    & \(\rightarrow\) & \\\midrule
-                  5   & B. OR             & \lstinline+x | y+     & \(\rightarrow\) & \\\midrule
-                  4   & L. AND            & \lstinline|x \&\& y|  & \(\rightarrow\) & \\\midrule
-                  3   & L. OR             & \lstinline+x || y+    & \(\rightarrow\) & \\\midrule
+                  7   & BL. AND           & \lstinline|x \& y|    & \(\rightarrow\) & \\\midrule
+                  6   & BL. XOR           & \lstinline|x \^ y|    & \(\rightarrow\) & \\\midrule
+                  5   & BL. OR            & \lstinline+x | y+     & \(\rightarrow\) & \\\midrule
+                  4   & C. AND            & \lstinline|x \&\& y|  & \(\rightarrow\) & \\\midrule
+                  3   & C. OR             & \lstinline+x || y+    & \(\rightarrow\) & \\\midrule
                   2   & Ternary           & \lstinline|x ? y : z| & \(\leftarrow\) & \\\midrule
                   1   & Assignment        & \lstinline!x = y!     & \(\leftarrow\) & Includes all compound assignment operators \\\midrule
                   0   & Lambda / Switch   & \lstinline|x -> y|    & \(\leftarrow\) & \\\bottomrule
 \end{tabularx}\end{center}
 
-U. \quad Unary - Operator deals with one single argument
-
-L. \quad Logical - Operator deals with booleans and true/false values
-
-B. \quad Bitwise - Operator manipulates bits of primitive data types
-
-\(J\) - Java-Exclusive \quad \(C\) - C-Family-Exclusive \quad \(P\) - Python-Exclusive
-
 \section{Containers}
 \subsection{Data Structures}
-Note that any value related to an index, \lstinline|int i|, for these intents and purposes cannot be negative; It would be more appropriate to interpret as \lstinline|unsigned int i|. 
+Note that any value related to an index, \lstinline|int i|, for these intents cannot be negative; It would be more appropriate to interpret as \lstinline|unsigned int i|: You cannot have negative indexes in Java.
 \setlength{\tabcolsep}{5pt}
 \begin{center}\begin{tabularx}{\textwidth}{lX}\toprule
   Name & Initialization, Methods, Properties\\
