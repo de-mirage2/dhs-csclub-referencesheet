@@ -86,7 +86,7 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
 
 \subsection{Python}
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
-  Lvl. & \quad Name & Operator & Direction & Description
+  Lvl.                & \quad Name        & Operator          & Direction & \qquad Description \\\midrule
 \end{tabularx}\end{center}
 \subsection{Java}
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
@@ -132,8 +132,11 @@ Note that any value related to an index, \lstinline|int i|, for these intents ca
                                          & \lstinline|x.add(Type y)| or \lstinline|x.add(int i, Type y)|\\
                                          & \lstinline|x.remove(int i)| \\
                                          & \lstinline|x.clear()| \\
-                                         & \lstinline|boolean x.isEmpty()| \\
-  \multirow{4}{*}{\lstinline|HashMap|} & \lstinline|HashMap| \\
+                                         & \lstinline|boolean x.isEmpty()| \\\midrule
+  \multirow{4}{*}{\lstinline|HashMap|}   & \lstinline|HashMap<KeyType, ValueType> x = new HashMap<>();| \\
+                                         & \lstinline|x.put(KeyType k, ValueType v)| \\
+                                         & \lstinline|x.get(KeyType k)| \\
+                                         & \lstinline|x.remove(KeyType k)| \\
 \end{tabularx}\end{center}
 
 %\section{shits and giggles}
