@@ -37,15 +37,11 @@
 % https://www.overleaf.com/learn/latex/Code_listing
 
 %%%%%%%%
-%%%%%%%%
-%%%%%%%%
-
-%TODO: Primitive ranges (how long is a long), Order of operations
-
 
 \title{Dulles VikeBytes\\Official Reference Sheet}
 \date{\today}
-\author{Dulles CS Club \and Dulles GirlBytes}
+\author{Dulles CS Club}
+% Miraj Parikh wrote most of the code with some assistance from Austin Song
 
 \begin{document}
 
@@ -86,7 +82,7 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
 
 \subsection{Python}
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
-  Lvl.                & \quad Name        & Operator          & Direction & \qquad Description \\\midrule
+  Lvl. & \quad Name & Operator & Direction & Description
 \end{tabularx}\end{center}
 \subsection{Java}
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
@@ -121,25 +117,32 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
 
 \section{Containers}
 \subsection{Data Structures}
-Note that any value related to an index, \lstinline|int i|, for these intents cannot be negative; It would be more appropriate to interpret as \lstinline|unsigned int i|: You cannot have negative indexes in Java.
-\setlength{\tabcolsep}{5pt}
-\begin{center}\begin{tabularx}{\textwidth}{lX}\toprule
-  Name & Initialization, Methods, Properties\\
-  \multirow{3}{*}{Array} & \lstinline|Type[] x = new Type[int i];| \\
-                         & \lstinline|int i -> x.length| \\
-                         & \lstinline|x[int j] = Type z;| \\\midrule
-  \multirow{5}{*}{\lstinline|ArrayList|} & \lstinline|ArrayList<Type> x = new ArrayList<Type>();| \\
-                                         & \lstinline|x.add(Type y)| or \lstinline|x.add(int i, Type y)|\\
-                                         & \lstinline|x.remove(int i)| \\
-                                         & \lstinline|x.clear()| \\
-                                         & \lstinline|boolean x.isEmpty()| \\\midrule
-  \multirow{4}{*}{\lstinline|HashMap|}   & \lstinline|HashMap<KeyType, ValueType> x = new HashMap<>();| \\
-                                         & \lstinline|x.put(KeyType k, ValueType v)| \\
-                                         & \lstinline|x.get(KeyType k)| \\
-                                         & \lstinline|x.remove(KeyType k)| \\
-\end{tabularx}\end{center}
+Let \lstinline|T| and \lstinline|U| refer to the type of an object (i.e., \lstinline|float| or \lstinline|Integer|). Note that for data structures outside of Arrays, non-primitive types must be used.
+Note that any value related to index/sizes (\lstinline|int i|, \lstinline|int j|, or \lstinline|int n|), for these intents, cannot be negative since negative indices do not exist in Java nor C++.
+\setlength{\tabcolsep}{3pt}
+\begin{center}\begin{tabularx}{\textwidth}{llX}\toprule
+  Name & Code & Description\\
+  \multirow{3}{*}{Array} & \lstinline|T[] x = new T[n];| & Initialize an array \(x\) of size \(n\)\\
+                         & \lstinline|x[i] = y;| & Set element of \(x\) at index \(i\) to \(y\)\\
+                         & \lstinline|n = x.length;| & Record the length of array \(x\) \\\midrule
+  \multirow{7}{*}[-0.5em]{\lstinline|ArrayList|} & \lstinline|List<T> x = new ArrayList<T>();| & Initialize an ArrayList \(x\) of type \(T\)\\
+                                         & \lstinline|x.add(y);| or \lstinline|x.add(i, y);| & Insert element \(y\) to \(x\) at index \(i\); if \(i\) is not given, then insert at the end of \(x\)\\
+                                         & \lstinline|x.get(y)| & Return the element located at index \(i\) in \(x\) \\
+                                         & \lstinline|x.remove(i);| & Return the element located at index \(i\) in \(x\), then delete it\\
+                                         & \lstinline|x.clear();| & Remove all elements within \(x\)\\
+                                         & \lstinline|x.isEmpty()| & Return a boolean indicating whether \(x\) is empty or not\\
+                                         & \lstinline|x.size()| & Return the count of elements within \(x\)\\\midrule
+  \multirow{8}{*}[-2em]{\lstinline|HashMap|} & \lstinline|Map<T, U> x = new HashMap<>();| & Initialize a HashMap \(x\) mapping \(T\) objects to \(U\) objects\\
+                                       & \lstinline|x.put(y, z);| & Write entry \(y-z\) to \(x\)\\
+                                       & \lstinline|x.get(y);| & Return the value of the entry in \(x\) with a unique key \(y\)\\
+                                       & \lstinline|x.getOrDefault(y, z);| & Return the value of the entry in \(x\) with a unique key \(y\); if there is no such entry, then return \(z\) by default.\\
+                                       & \lstinline|x.containsKey(y);| & Return a boolean indicating whether \(x\) contains a entry that has a key \(y\)\\
+                                       & \lstinline|x.containsValue(y);| & Return a boolean indicating whether \(x\) contains a entry that has a value \(y\)\\
+                                       & \lstinline|x.remove(y);| & Return the value of the entry in \(x\) with a unique key \(y\), then delete it\\
+                                       & \lstinline|x.size();| & Return the count of entries within \(x\)
+\\\bottomrule\end{tabularx}\end{center}
 
-%\section{shits and giggles}
+%\section{trolling}
 %\subsection{Alma Mater}
 %Dulles High we pledge to you, We’ll be loyal;
 
