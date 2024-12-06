@@ -40,7 +40,7 @@
 
 \title{Dulles VikeBytes\\Official Reference Sheet}
 \date{\today}
-\author{Dulles CS Club}
+\author{Dulles CS Club\thanks{Written by Miraj Parikh with assistance from Austin Song}}
 % Miraj Parikh wrote most of the code with some assistance from Austin Song
 
 \begin{document}
@@ -49,7 +49,8 @@
 {\let\newpage\relax\maketitle} % snippet to maketitle w/out prefixing page
 
 \renewcommand{\arraystretch}{1.25} % it hurts the eyes to keep numbers close together
-\section{Primitive Data Types (Java)}
+\section{Primitive Data Types (Java \& C-family)}
+Note that the C-family character data type actually has the same dimensions as a byte.
 \begin{center}\begin{tabular}{lllr}\toprule
   Name      &Size (Bits) &Initialization              &Range \\\midrule
   Boolean   &1           &\lstinline|bool x|          &True/False \\\midrule
@@ -80,39 +81,61 @@ C. (Conditional) \dotfill Deals with boolean expressions in if statements
 
 BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending on passed data
 
-\subsection{Python}
+\subsection{Python} % https://docs.python.org/3/reference/expressions.html#operator-precedence
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
-  Lvl. & \quad Name & Operator & Direction & Description
+  Lvl. & \quad Name & Operator & Direction &\qquad Description \\\midrule
+  \multirow{4}{*}{18} & Parentheses & \lstinline|(abc)| & \multirow{4}{*}{\(\to\)} & Groups operations together \\
+                      & List Display & \lstinline|[a,b,c]| & & Displays expressions together as a list\\
+                      & Set Display & \lstinline|\{a,b,c\}| & & Displays expressions together as a set\\
+                      & Dictionary Display & \lstinline|\{a:z,b:y,c:x\}| & & Displays expressions together as dictionary\\\midrule
+  \multirow{4}{*}{17} & Function Call & \lstinline|f(args)| & \multirow{4}{*}{\(\to\)} & Calls function \lstinline|f| with arguments \lstinline|args|\\
+                      & Structure Access & \lstinline|x[y]| & & Accesses \lstinline|x| with index/key \lstinline|y|\\
+                      & Structure Slicing & \lstinline|x[y:z]| & & Accesses elements within \lstinline|x| from \lstinline|y| to \lstinline|z|\\
+                      & Attribute Reference & \lstinline|x.y| & & Accesses attribute \lstinline|y| from \lstinline|x|\\\midrule
+  16 & Await expr. & \lstinline|await x| & \(\to\) & Await\\\midrule
+  15 & Exponentiation & \lstinline|x**y| & \(\gets\) & Raises number \lstinline|x| to the power of number \lstinline|y|\\\midrule
+  \multirow{3}{*}{13} & U. Plus & \lstinline|+x| & \multirow{2}{*}{\(\to\)} & Returns the value of \lstinline|int x|\\
+                      & U. Minus          & \lstinline|-x|  & & Returns the negative value of \lstinline|int x|\\
+                      & U. BL. NOT        & \lstinline|\~x| & & Returns the value of \lstinline|int x| after flipping each bit\\\midrule
+
 \end{tabularx}\end{center}
 \subsection{Java}
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
   Lvl.                & \quad Name        & Operator          & Direction & \qquad Description \\\midrule
-  \multirow{4}{*}{16} & Parentheses       & \lstinline|(x)|   & \multirow{4}{*}{\(\rightarrow\)}& Groups code together \\
+  \multirow{4}{*}{16} & Parentheses       & \lstinline|(abc)| & \multirow{4}{*}{\(\to\)}& Groups operations together\\
                       & Array Access      & \lstinline|x[y]|  & & Access element indexed at \lstinline|int y| of an array \lstinline|x[]|\\
                       & Object Creation   & \lstinline|new|   & & Keyword allowing creation of a new object\\
                       & Member Access     & \lstinline|x.y|   & & Allows member \lstinline|y| to be accessed from parent \lstinline|x| \\ \midrule
-  \multirow{2}{*}{15} & U. Post-Increment & \lstinline|x++|   & \multirow{2}{*}{\(\rightarrow\)} & Return the value of \lstinline|int x| before the increment \\
-                      & U. Post-Decrement & \lstinline|x--|   & & Returns the value of \lstinline|int x| before the decrement\\\midrule
-  \multirow{6}{*}{14} & U. Plus           & \lstinline|+x|    & \multirow{6}{*}{\(\leftarrow\)} & Returns the value of \lstinline|int x|\\
+  \multirow{2}{*}{15} & U. Post-Increment & \lstinline|x++|   & \multirow{2}{*}{\(\to\)} & Return the value of \lstinline|int x| before incrementing \\
+                      & U. Post-Decrement & \lstinline|x--|   & & Returns the value of \lstinline|int x| before decrementing\\\midrule
+  \multirow{6}{*}{14} & U. Plus           & \lstinline|+x|    & \multirow{6}{*}{\(\gets\)} & Returns the value of \lstinline|int x|\\
                       & U. Minus          & \lstinline|-x|    & & Returns the negative value of \lstinline|int x| \\
-                      & U. BL. NOT         & \lstinline|-x|    & & Returns the value of \lstinline|int x| after flipping each bit\\
-                      & U. C. NOT         & \lstinline|-x|    & & Returns the value of \lstinline|bool x| after flipping it \\
+                      & U. BL. NOT        & \lstinline|\~x|  & & Returns the value of \lstinline|int x| after flipping each bit\\
+                      & U. C. NOT         & \lstinline|!x|    & & Returns the value of \lstinline|bool x| after flipping it \\
                       & U. Pre-Increment  & \lstinline|++x|   & & Increments before returning the value of \lstinline|int x| \\
                       & U. Pre-Decrement  & \lstinline|--x|   & & Decrements before returning the value of \lstinline|int x| \\\midrule
-                  13  & Cast              & \lstinline|(y) x| & \(\leftarrow\) & Casts variable \lstinline|x| to type \lstinline|y| \\\midrule
-                  12  & Multiplicative    & \parbox[c]{1cm}{\centering\lstinline|x * y|\\\lstinline|x / y|\\\lstinline|x \% y|} & \(\rightarrow\) & \\\midrule
-                  11  & Additive          & \lstinline|x + y| or \lstinline|x - y| & \(\rightarrow\) & Includes string concatenation \\\midrule
-                  10  & Bitshift          & \parbox[c]{1.5cm}{\centering\lstinline|x >> y|\\\lstinline|x << y|\\\lstinline|x >>> y|} & \(\rightarrow\) & Shifts binary expression of \lstinline|int x| by \lstinline|int y| bits\\\midrule
-                  9   & Relational        & \parbox[c]{1.5cm}{\centering\lstinline|x < y|\\\lstinline|x <= y|\\\lstinline|x >= y|\\\lstinline|x > y|} & \(\rightarrow\) & \\\midrule
-                  8   & Equality          & \parbox[c]{1.5cm}{\centering\lstinline|x = y|\\\lstinline|x != y|} & \(\rightarrow\) & \\\midrule
-                  7   & BL. AND           & \lstinline|x \& y|    & \(\rightarrow\) & \\\midrule
-                  6   & BL. XOR           & \lstinline|x \^ y|    & \(\rightarrow\) & \\\midrule
-                  5   & BL. OR            & \lstinline+x | y+     & \(\rightarrow\) & \\\midrule
-                  4   & C. AND            & \lstinline|x \&\& y|  & \(\rightarrow\) & \\\midrule
-                  3   & C. OR             & \lstinline+x || y+    & \(\rightarrow\) & \\\midrule
-                  2   & Ternary           & \lstinline|x ? y : z| & \(\leftarrow\) & \\\midrule
-                  1   & Assignment        & \lstinline!x = y!     & \(\leftarrow\) & Includes all compound assignment operators \\\midrule
-                  0   & Lambda / Switch   & \lstinline|x -> y|    & \(\leftarrow\) & \\\bottomrule
+                  13  & Cast              & \lstinline|(T) x| & \(\gets\) & Casts variable \lstinline|x| to type \lstinline|T| \\\midrule
+ \multirow{3}{*}{12}  & Multiplication    & \lstinline|x * y| & \multirow{3}{*}{\(\to\)} & Return \lstinline|x| multiplied by \lstinline|y|; cannot repeat strings\\
+                      & Division          & \lstinline|x / y| & & Return \lstinline|x| divided by \lstinline|y|\\
+                      & Remainder         & \lstinline|x \% y| & & Modulo--Return remainder of \lstinline|x| divided by \lstinline|y|\\\midrule
+                  11  & Additive          & \lstinline|x + y| or \lstinline|x - y| & \(\to\) & Former can concatenate strings\\\midrule
+  \multirow{3}{*}{10} & Right Bitshift & \lstinline|x >> y| & \multirow{3}{*}{\(\to\)} & Shifts binary expression of \lstinline|int x| by \lstinline|y| bits to the right\\
+                      & (Unsigned) & \lstinline|x >>> y| & & Does the same as above but will not preserve sign\\
+                      & Left Bitshift & \lstinline|x << y| & & Shifts binary expression of \lstinline|int x| by \lstinline|y| bits to the left\\\midrule
+  \multirow{4}{*}{9}   & \multirow{4}{*}{Relational}        & \lstinline|x > y| & \multirow{4}{*}{\(\to\)} & \lstinline|true| if \lstinline|x| is comparatively greater than \lstinline|y| \\
+                      &                   & \lstinline|x >= y| & & \lstinline|true| if \lstinline|x| is comparatively greater than or equal to \lstinline|y| \\
+                      &                   & \lstinline|x <= y| & & \lstinline|true| if \lstinline|x| is comparatively less than or equal to \lstinline|y| \\
+                      &                   & \lstinline|x < y| & & \lstinline|true| if \lstinline|x| is comparatively less than \lstinline|y| \\\midrule
+  \multirow{2}{*}{8}  & Equality          & \lstinline|x == y|    & \multirow{2}{*}{\(\to\)} & \lstinline|true| if \lstinline|x| is \textit{identical} to \lstinline|y| (not to compare Data Structures)\\
+                      & Inequality        & \lstinline|x != y|    &  & Does the opposite of above\\\midrule
+                  7   & BL. AND           & \lstinline|x \& y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| are 1. \\\midrule
+                  6   & BL. XOR           & \lstinline|x \^ y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| differ.\\\midrule
+                  5   & BL. OR            & \lstinline+x | y+     & \(\to\) & Returns 1 if either corresponding bit in \lstinline|x| or \lstinline|y| is 1.\\\midrule
+                  4   & C. AND            & \lstinline|x \&\& y|  & \(\to\) & Returns \lstinline|true| only if both booleans \lstinline|x| and \lstinline|y| are true.\\\midrule
+                  3   & C. OR             & \lstinline+x || y+    & \(\to\) & Returns \lstinline|true| if either boolean \lstinline|x| or \lstinline|y| are true.\\\midrule
+                  2   & Ternary           & \lstinline|x ? y : z| & \(\gets\) & Executes \lstinline|y| if boolean \lstinline|x| is true, else executes \lstinline|y|.\\\midrule
+                  1   & Assignment        & \lstinline!x = y!     & \(\gets\) & Includes all compound assignment operators \\\midrule
+                  0   & Lambda / Switch   & \lstinline|x -> y|    & \(\gets\) & Define an anonymous function or script\\\bottomrule
 \end{tabularx}\end{center}
 
 \section{Containers}
