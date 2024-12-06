@@ -3,7 +3,7 @@
 \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed}
 \usepackage{multirow,booktabs,tabularx}
 \usepackage{xcolor,listings,realboxes}
-\usepackage{courier}
+\usepackage{courier,csquotes}
 \usepackage{lipsum}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
@@ -50,7 +50,7 @@
 
 \renewcommand{\arraystretch}{1.25} % it hurts the eyes to keep numbers close together
 \section{Primitive Data Types (Java \& C-family)}
-Note that the C-family character data type actually has the same dimensions as a byte.
+Note that the C-family \lstinline|character| data type actually has the same dimensions as a byte.
 \begin{center}\begin{tabular}{lllr}\toprule
   Name      &Size (Bits) &Initialization              &Range \\\midrule
   Boolean   &1           &\lstinline|bool x|          &True/False \\\midrule
@@ -83,7 +83,7 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
 
 \subsection{Python} % https://docs.python.org/3/reference/expressions.html#operator-precedence
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
-  Lvl. & \quad Name & Operator & Direction &\qquad Description \\\midrule
+  Lvl. & \quad Name & Operator & Direction & \qquad Description \\\midrule
   \multirow{4}{*}{18} & Parentheses & \lstinline|(abc)| & \multirow{4}{*}{\(\to\)} & Groups operations together \\
                       & List Display & \lstinline|[a,b,c]| & & Displays expressions together as a list\\
                       & Set Display & \lstinline|\{a,b,c\}| & & Displays expressions together as a set\\
@@ -94,10 +94,30 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
                       & Attribute Reference & \lstinline|x.y| & & Accesses attribute \lstinline|y| from \lstinline|x|\\\midrule
   16 & Await expr. & \lstinline|await x| & \(\to\) & Await\\\midrule
   15 & Exponentiation & \lstinline|x**y| & \(\gets\) & Raises number \lstinline|x| to the power of number \lstinline|y|\\\midrule
-  \multirow{3}{*}{13} & U. Plus & \lstinline|+x| & \multirow{2}{*}{\(\to\)} & Returns the value of \lstinline|int x|\\
-                      & U. Minus          & \lstinline|-x|  & & Returns the negative value of \lstinline|int x|\\
-                      & U. BL. NOT        & \lstinline|\~x| & & Returns the value of \lstinline|int x| after flipping each bit\\\midrule
-
+  \multirow{3}{*}{13} & U. Plus & \lstinline|+x| & \multirow{2}{*}{\(\to\)} & Returns the value of \lstinline|x|\\
+                      & U. Minus          & \lstinline|-x|  & & Returns the negative value of \lstinline|x|\\
+                      & U. BL. NOT        & \lstinline|\~x| & & Returns the value of \lstinline|x| after flipping each bit\\\midrule
+  \multirow{5}{*}{12} & Multiplication & \lstinline|x * y| & \multirow{2}{*}{\(\to\)} & Returns the product of numbers \lstinline|x| and \lstinline|y|; can repeat strings\\
+                      & (NumPy Matrix) & \lstinline|x @ y| & & Returns the matrix product of NumPy matrices \lstinline|x| and \lstinline|y|\\
+                      & Division & \lstinline|x / y| & & Returns \lstinline|x| divided by \lstinline|y|\\
+                      & (Floor) & \lstinline|x // y| & & Returns \lstinline|x| divided by \lstinline|y|, rounded down\\
+                      & Remainder & \lstinline|x \% y| & & Returns the remainder of \lstinline|x| divided by \lstinline|y|\\\midrule
+                   11 & Additive & \lstinline|x + y| or \lstinline|x - y| & \(\to\) & \lstinline|+| can concatenate strings\\\midrule
+  \multirow{2}{*}{10} & Right Bitshift & \lstinline|x >> y| & \multirow{2}{*}{\(\to\)} & Shifts binary expression of \lstinline|x| by \lstinline|y| bits to the right\\
+                      & Left Bitshift & \lstinline|x << y| & & Shifts binary expression of \lstinline|x| by \lstinline|y| bits to the left\\\midrule
+                  9   & BL. AND           & \lstinline|x \& y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| are 1. \\\midrule
+                  8   & BL. XOR           & \lstinline|x \^ y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| differ.\\\midrule
+                  7   & BL. OR            & \lstinline+x | y+     & \(\to\) & Returns 1 if either corresponding bit in \lstinline|x| or \lstinline|y| is 1.\\\midrule
+  \multirow{10}{*}{6}  & \multirow{10}{*}{Relational}        & \lstinline|x > y| & \multirow{10}{*}{\(\to\)} & \lstinline|true| if \lstinline|x| is comparatively greater than \lstinline|y| \\
+                      & & \lstinline|x >= y| & & \lstinline|true| if \lstinline|x| is comparatively greater than or equal to \lstinline|y| \\
+                      & & \lstinline|x <= y| & & \lstinline|true| if \lstinline|x| is comparatively less than or equal to \lstinline|y| \\
+                      & & \lstinline|x < y| & & \lstinline|true| if \lstinline|x| is comparatively less than \lstinline|y| \\
+                      & & \lstinline|x == y| & & \lstinline|true| if \lstinline|x| is \textit{equal} to \lstinline|y| (not to compare Data Structures\\
+                      & & \lstinline|x != y|    &  & Does the opposite of above\\
+                      & & \lstinline|x is y| & & \lstinline|true| if \lstinline|x| is \textit{identical} to \lstinline|y| (not to compare Data Structures)\\
+                      & & \lstinline|x is not y| & & Does the opposite of above\\
+                      & & \lstinline|x in y| & & \lstinline|true| if \lstinline|x| is an element within \lstinline|y|\\
+                      & & \lstinline|x not in y| & & Does the opposite of above\\\midrule
 \end{tabularx}\end{center}
 \subsection{Java}
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
@@ -115,22 +135,22 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
                       & U. Pre-Increment  & \lstinline|++x|   & & Increments before returning the value of \lstinline|int x| \\
                       & U. Pre-Decrement  & \lstinline|--x|   & & Decrements before returning the value of \lstinline|int x| \\\midrule
                   13  & Cast              & \lstinline|(T) x| & \(\gets\) & Casts variable \lstinline|x| to type \lstinline|T| \\\midrule
- \multirow{3}{*}{12}  & Multiplication    & \lstinline|x * y| & \multirow{3}{*}{\(\to\)} & Return \lstinline|x| multiplied by \lstinline|y|; cannot repeat strings\\
+ \multirow{3}{*}{12}  & Multiplication    & \lstinline|x * y| & \multirow{3}{*}{\(\to\)} & Returns the product of \lstinline|x| and \lstinline|y|; cannot repeat strings\\
                       & Division          & \lstinline|x / y| & & Return \lstinline|x| divided by \lstinline|y|\\
                       & Remainder         & \lstinline|x \% y| & & Modulo--Return remainder of \lstinline|x| divided by \lstinline|y|\\\midrule
                   11  & Additive          & \lstinline|x + y| or \lstinline|x - y| & \(\to\) & Former can concatenate strings\\\midrule
-  \multirow{3}{*}{10} & Right Bitshift & \lstinline|x >> y| & \multirow{3}{*}{\(\to\)} & Shifts binary expression of \lstinline|int x| by \lstinline|y| bits to the right\\
+  \multirow{3}{*}{10} & Right Bitshift & \lstinline|x >> y| & \multirow{3}{*}{\(\to\)} & Shifts binary expression of \lstinline|int x| by \lstinline|int y| bits to the right\\
                       & (Unsigned) & \lstinline|x >>> y| & & Does the same as above but will not preserve sign\\
-                      & Left Bitshift & \lstinline|x << y| & & Shifts binary expression of \lstinline|int x| by \lstinline|y| bits to the left\\\midrule
+                      & Left Bitshift & \lstinline|x << y| & & Shifts binary expression of \lstinline|int x| by \lstinline|int y| bits to the left\\\midrule
   \multirow{4}{*}{9}   & \multirow{4}{*}{Relational}        & \lstinline|x > y| & \multirow{4}{*}{\(\to\)} & \lstinline|true| if \lstinline|x| is comparatively greater than \lstinline|y| \\
                       &                   & \lstinline|x >= y| & & \lstinline|true| if \lstinline|x| is comparatively greater than or equal to \lstinline|y| \\
                       &                   & \lstinline|x <= y| & & \lstinline|true| if \lstinline|x| is comparatively less than or equal to \lstinline|y| \\
                       &                   & \lstinline|x < y| & & \lstinline|true| if \lstinline|x| is comparatively less than \lstinline|y| \\\midrule
   \multirow{2}{*}{8}  & Equality          & \lstinline|x == y|    & \multirow{2}{*}{\(\to\)} & \lstinline|true| if \lstinline|x| is \textit{identical} to \lstinline|y| (not to compare Data Structures)\\
                       & Inequality        & \lstinline|x != y|    &  & Does the opposite of above\\\midrule
-                  7   & BL. AND           & \lstinline|x \& y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| are 1. \\\midrule
-                  6   & BL. XOR           & \lstinline|x \^ y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| differ.\\\midrule
-                  5   & BL. OR            & \lstinline+x | y+     & \(\to\) & Returns 1 if either corresponding bit in \lstinline|x| or \lstinline|y| is 1.\\\midrule
+                  7   & BL. AND           & \lstinline|x \& y|    & \(\to\) & Returns 1 only if matching bits in numbers \lstinline|x| and \lstinline|y| are 1. \\\midrule
+                  6   & BL. XOR           & \lstinline|x \^ y|    & \(\to\) & Returns 1 only if matching bits in numbers \lstinline|x| and \lstinline|y| differ.\\\midrule
+                  5   & BL. OR            & \lstinline+x | y+     & \(\to\) & Returns 1 if either matching bit in numbers \lstinline|x| or \lstinline|y| is 1.\\\midrule
                   4   & C. AND            & \lstinline|x \&\& y|  & \(\to\) & Returns \lstinline|true| only if both booleans \lstinline|x| and \lstinline|y| are true.\\\midrule
                   3   & C. OR             & \lstinline+x || y+    & \(\to\) & Returns \lstinline|true| if either boolean \lstinline|x| or \lstinline|y| are true.\\\midrule
                   2   & Ternary           & \lstinline|x ? y : z| & \(\gets\) & Executes \lstinline|y| if boolean \lstinline|x| is true, else executes \lstinline|y|.\\\midrule
@@ -139,30 +159,42 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
 \end{tabularx}\end{center}
 
 \section{Containers}
-\subsection{Data Structures}
+\subsection{Data Structures (Java)}
 Let \lstinline|T| and \lstinline|U| refer to the type of an object (i.e., \lstinline|float| or \lstinline|Integer|). Note that for data structures outside of Arrays, non-primitive types must be used.
-Note that any value related to index/sizes (\lstinline|int i|, \lstinline|int j|, or \lstinline|int n|), for these intents, cannot be negative since negative indices do not exist in Java nor C++.
+Note that any value related to index/sizes (\lstinline|int i|, \lstinline|int j|, or \lstinline|int n|), for these intents, cannot be negative since negative indices do not exist in Java.
 \setlength{\tabcolsep}{3pt}
 \begin{center}\begin{tabularx}{\textwidth}{llX}\toprule
   Name & Code & Description\\
   \multirow{3}{*}{Array} & \lstinline|T[] x = new T[n];| & Initialize an array \(x\) of size \(n\)\\
                          & \lstinline|x[i] = y;| & Set element of \(x\) at index \(i\) to \(y\)\\
                          & \lstinline|n = x.length;| & Record the length of array \(x\) \\\midrule
-  \multirow{7}{*}[-0.5em]{\lstinline|ArrayList|} & \lstinline|List<T> x = new ArrayList<T>();| & Initialize an ArrayList \(x\) of type \(T\)\\
+  \multirow{12}{*}[-0.5em]{\lstinline|String|} & \lstinline|String x = "abc";| & Initialize a String \(x\) containing \enquote{abc}\\
+                                         & \lstinline|x.charAt(i)| & Return character in \(x\) located at index \(i\)\\
+                                         & \lstinline|x.compareTo(y)| & Compare strings \(x\) and \(y\) lexicographically; returns \(0\) if \(x\) equals \(y\), \(>\) if \(x\) is greater than \(y\), \(<0\) if \(x\) is lesser than \(y\)\\
+                                         & \lstinline|x.equals(y)| & Returns whether the contents of \(x\) equals \(y\)\\
+                                         & \lstinline|x.indexOf(y)| & Return the first index where character \(y\) is first found in \(x\)\\
+                                         & \lstinline|x.lastIndexOf(y)| & Return the last index where character \(y\) is first found in \(x\)\\
+                                         & \lstinline|x.length()| & Return the length of \(x\)\\
+                                         & \lstinline|x.toCharArray()| & Return \(x\) as an array of characters\\
+                                         & \lstinline|x.toUpperCase()| & Return \(x\) with all letters uppercased\\
+                                         & \lstinline|x.toLowerCase()| & Return \(x\) with all letters lowercased\\
+                                         & \lstinline|x.trim()| & Return \(x\) with whitespace removed from both ends\\
+                                         & \lstinline|x.substring(y, z)| & Return characters in \(x\) from index \(y\) before index \(z\) \\\midrule
+  \multirow{7}{*}[-0.5em]{\lstinline|ArrayList|} & \lstinline|List<T> x = new ArrayList<T>();| & Initialize an ArrayList \(x\) of \(T\)-typed objects\\
                                          & \lstinline|x.add(y);| or \lstinline|x.add(i, y);| & Insert element \(y\) to \(x\) at index \(i\); if \(i\) is not given, then insert at the end of \(x\)\\
                                          & \lstinline|x.get(y)| & Return the element located at index \(i\) in \(x\) \\
                                          & \lstinline|x.remove(i);| & Return the element located at index \(i\) in \(x\), then delete it\\
                                          & \lstinline|x.clear();| & Remove all elements within \(x\)\\
                                          & \lstinline|x.isEmpty()| & Return a boolean indicating whether \(x\) is empty or not\\
                                          & \lstinline|x.size()| & Return the count of elements within \(x\)\\\midrule
-  \multirow{8}{*}[-2em]{\lstinline|HashMap|} & \lstinline|Map<T, U> x = new HashMap<>();| & Initialize a HashMap \(x\) mapping \(T\) objects to \(U\) objects\\
+  \multirow{8}{*}[-2em]{\lstinline|HashMap|} & \lstinline|Map<T, U> x = new HashMap<>();| & Initialize a HashMap \(x\) mapping \(T\)-typed to \(U\)-typed objects\\
                                        & \lstinline|x.put(y, z);| & Write entry \(y-z\) to \(x\)\\
-                                       & \lstinline|x.get(y);| & Return the value of the entry in \(x\) with a unique key \(y\)\\
-                                       & \lstinline|x.getOrDefault(y, z);| & Return the value of the entry in \(x\) with a unique key \(y\); if there is no such entry, then return \(z\) by default.\\
-                                       & \lstinline|x.containsKey(y);| & Return a boolean indicating whether \(x\) contains a entry that has a key \(y\)\\
-                                       & \lstinline|x.containsValue(y);| & Return a boolean indicating whether \(x\) contains a entry that has a value \(y\)\\
+                                       & \lstinline|x.get(y)| & Return the value of the entry in \(x\) with a unique key \(y\)\\
+                                       & \lstinline|x.getOrDefault(y, z)| & Return the value of the entry in \(x\) with a unique key \(y\); if there is no such entry, then return \(z\) by default.\\
+                                       & \lstinline|x.containsKey(y)| & Return a boolean indicating whether \(x\) contains an entry that has a key \(y\)\\
+                                       & \lstinline|x.containsValue(y)| & Return a boolean indicating whether \(x\) contains an entry that has a value \(y\)\\
                                        & \lstinline|x.remove(y);| & Return the value of the entry in \(x\) with a unique key \(y\), then delete it\\
-                                       & \lstinline|x.size();| & Return the count of entries within \(x\)
+                                       & \lstinline|x.size()| & Return the count of entries within \(x\)
 \\\bottomrule\end{tabularx}\end{center}
 
 %\section{trolling}
