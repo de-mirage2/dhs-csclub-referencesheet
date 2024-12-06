@@ -2,11 +2,11 @@
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{mathtools,amssymb,amsfonts,amsthm,empheq,mdframed}
 \usepackage{multirow,booktabs,tabularx}
-\usepackage{xcolor,listings,realboxes}
-\usepackage{courier,csquotes}
-\usepackage{lipsum}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
+\usepackage{xcolor,listings,realboxes} % https://www.overleaf.com/learn/latex/Code_listing
+\usepackage{courier,csquotes,fourier-orns}
+%\usepackage{lipsum}
+%\usepackage{tikz}
+%\usetikzlibrary{arrows.meta,calc,decorations,shapes.geometric}
 %\usepackage{pgfplots}
 
 \definecolor{vb-red}{HTML}{D05353}
@@ -14,7 +14,7 @@
 \definecolor{vb-white}{HTML}{F1ECCE}
 \definecolor{vb-sky}{HTML}{9FC2CC}
 
-\lstdefinestyle{mystyle}{
+\lstdefinestyle{dhsstyle}{
     backgroundcolor=\color{vb-white},   
     commentstyle=\color{green},
     keywordstyle=\color{vb-red},
@@ -32,16 +32,15 @@
     rulesepcolor=\color{vb-sky}
 }
 
-\lstset{style=mystyle}
-
-% https://www.overleaf.com/learn/latex/Code_listing
+\lstset{style=dhsstyle}
 
 %%%%%%%%
 
 \title{Dulles VikeBytes\\Official Reference Sheet}
 \date{\today}
-\author{Dulles CS Club\thanks{Written by Miraj Parikh with assistance from Austin Song}}
+\author{Dulles CS Club}
 % Miraj Parikh wrote most of the code with some assistance from Austin Song
+% TODO: Adjust substring call and array init
 
 \begin{document}
 
@@ -50,24 +49,24 @@
 
 \renewcommand{\arraystretch}{1.25} % it hurts the eyes to keep numbers close together
 \section{Primitive Data Types (Java \& C-family)}
-Note that the C-family \lstinline|character| data type actually has the same dimensions as a byte.
+Note that the C-family Character primitive actually has the same dimensions as a byte. Also note that all other primitives are \textit{signed} by default whereas the Character primitive is \textit{unsigned} by default.
 \begin{center}\begin{tabular}{lllr}\toprule
-  Name      &Size (Bits) &Initialization              &Range \\\midrule
-  Boolean   &1           &\lstinline|bool x|          &True/False \\\midrule
-  Character &16          &\lstinline|signed char x|   &\(-32768 \leq x < 32768\) \\ 
-            &            &\lstinline|unsigned char x| &\(0 \leq x < 65536\) \\
-  Byte      &8           &\lstinline|byte x|          &\(-128 \leq x < 128\) \\
-            &            &\lstinline|unsigned byte x| &\(0 \leq x < 256\) \\
-  Short     &16          &\lstinline|short x|         &\(-32768 \leq x < 32768\) \\
-            &            &\lstinline|unsigned short x|&\(0 \leq x < 65536\) \\
-  Integer   &32          &\lstinline|int x|           &\(-2147483648 \leq x < 2147483648\) \\
-            &            &\lstinline|unsigned int x|  &\(0 \leq x < 4294967295\) \\
-  Long      &64          &\lstinline|long x|          &\(-2^{63} \leq x < 2^{63}\) \\
-            &            &\lstinline|unsigned long x| &\(0 \leq x < 2^{64}\) \\\midrule
-  Float     &32          &\lstinline|float x|         &\(1.5\cdot10^{-45} \leq |x| < 3.4\cdot10^{38}\) \\
-            &            &                            &(6-7 significant digits) \\
-  Double    &64          &\lstinline|double x|        &\(4.9\cdot10^{-324} \leq |x| < 1.7\cdot10^{308}\) \\
-            &            &                            &(15 significant digits) \\
+  Name (Java Wrapper Class)      &Size (Bits) &Initialization              &Range \\\midrule
+  Boolean   &1           &\lstinline|bool x;|           &True/False \\\midrule
+  Byte      &8           &\lstinline|byte x;|           &\(-128 \leq x < 128\) \\
+            &            &\lstinline|unsigned byte x;|  &\(0 \leq x < 256\) \\
+  Short     &16          &\lstinline|short x;|          &\(-32768 \leq x < 32768\) \\
+            &            &\lstinline|unsigned short x;| &\(0 \leq x < 65536\) \\
+  Character &16          &\lstinline|signed char x;|    &\(-32768 \leq x < 32768\) \\ 
+            &            &\lstinline|char x;|           &\(0 \leq x < 65536\) \\
+  Integer   &32          &\lstinline|int x;|            &\(-2147483648 \leq x < 2147483648\) \\
+            &            &\lstinline|unsigned int x;|   &\(0 \leq x < 4294967296\) \\
+  Long      &64          &\lstinline|long x;|           &\(-2^{63} \leq x < 2^{63}\) \\
+            &            &\lstinline|unsigned long x;|  &\(0 \leq x < 2^{64}\) \\\midrule
+  Float     &32          &\lstinline|float x;|          &\(1.5\cdot10^{-45} \leq |x| < 3.4\cdot10^{38}\) \\
+            &            &                              &(6-7 significant digits) \\
+  Double    &64          &\lstinline|double x|          &\(4.9\cdot10^{-324} \leq |x| < 1.7\cdot10^{308}\) \\
+            &            &                              &(15 significant digits) \\
 \bottomrule\end{tabular}\end{center}
 
 \setlength{\tabcolsep}{1pt}
@@ -90,9 +89,9 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
                       & Dictionary Display & \lstinline|\{a:z,b:y,c:x\}| & & Displays expressions together as dictionary\\\midrule
   \multirow{4}{*}{17} & Function Call & \lstinline|f(args)| & \multirow{4}{*}{\(\to\)} & Calls function \lstinline|f| with arguments \lstinline|args|\\
                       & Structure Access & \lstinline|x[y]| & & Accesses \lstinline|x| with index/key \lstinline|y|\\
-                      & Structure Slicing & \lstinline|x[y:z]| & & Accesses elements within \lstinline|x| from \lstinline|y| to \lstinline|z|\\
+                      & Structure Slicing & \lstinline|x[i:j]| & & Accesses elements within \lstinline|x| from indexes \lstinline|i| to \lstinline|j|\\
                       & Attribute Reference & \lstinline|x.y| & & Accesses attribute \lstinline|y| from \lstinline|x|\\\midrule
-  16 & Await expr. & \lstinline|await x| & \(\to\) & Await\\\midrule
+  16 & Await expr. & \lstinline|await x| & \(\to\) & Suspend execution of coroutine on an awaitable object\\\midrule
   15 & Exponentiation & \lstinline|x**y| & \(\gets\) & Raises number \lstinline|x| to the power of number \lstinline|y|\\\midrule
   \multirow{3}{*}{13} & U. Plus & \lstinline|+x| & \multirow{2}{*}{\(\to\)} & Returns the value of \lstinline|x|\\
                       & U. Minus          & \lstinline|-x|  & & Returns the negative value of \lstinline|x|\\
@@ -105,19 +104,25 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
                    11 & Additive & \lstinline|x + y| or \lstinline|x - y| & \(\to\) & \lstinline|+| can concatenate strings\\\midrule
   \multirow{2}{*}{10} & Right Bitshift & \lstinline|x >> y| & \multirow{2}{*}{\(\to\)} & Shifts binary expression of \lstinline|x| by \lstinline|y| bits to the right\\
                       & Left Bitshift & \lstinline|x << y| & & Shifts binary expression of \lstinline|x| by \lstinline|y| bits to the left\\\midrule
-                  9   & BL. AND           & \lstinline|x \& y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| are 1. \\\midrule
-                  8   & BL. XOR           & \lstinline|x \^ y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| differ.\\\midrule
-                  7   & BL. OR            & \lstinline+x | y+     & \(\to\) & Returns 1 if either corresponding bit in \lstinline|x| or \lstinline|y| is 1.\\\midrule
-  \multirow{10}{*}{6}  & \multirow{10}{*}{Relational}        & \lstinline|x > y| & \multirow{10}{*}{\(\to\)} & \lstinline|true| if \lstinline|x| is comparatively greater than \lstinline|y| \\
-                      & & \lstinline|x >= y| & & \lstinline|true| if \lstinline|x| is comparatively greater than or equal to \lstinline|y| \\
-                      & & \lstinline|x <= y| & & \lstinline|true| if \lstinline|x| is comparatively less than or equal to \lstinline|y| \\
-                      & & \lstinline|x < y| & & \lstinline|true| if \lstinline|x| is comparatively less than \lstinline|y| \\
-                      & & \lstinline|x == y| & & \lstinline|true| if \lstinline|x| is \textit{equal} to \lstinline|y| (not to compare Data Structures\\
-                      & & \lstinline|x != y|    &  & Does the opposite of above\\
-                      & & \lstinline|x is y| & & \lstinline|true| if \lstinline|x| is \textit{identical} to \lstinline|y| (not to compare Data Structures)\\
-                      & & \lstinline|x is not y| & & Does the opposite of above\\
-                      & & \lstinline|x in y| & & \lstinline|true| if \lstinline|x| is an element within \lstinline|y|\\
-                      & & \lstinline|x not in y| & & Does the opposite of above\\\midrule
+                  9 & BL. AND           & \lstinline|x \& y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| are 1. \\\midrule
+                  8 & BL. XOR           & \lstinline|x \^ y|    & \(\to\) & Returns 1 only if corresponding bits in \lstinline|x| and \lstinline|y| differ.\\\midrule
+                  7 & BL. OR            & \lstinline+x | y+     & \(\to\) & Returns 1 if either corresponding bit in \lstinline|x| or \lstinline|y| is 1.\\\midrule
+  \multirow{10}{*}{6} & \multirow{10}{*}{Relational}        & \lstinline|x > y| & \multirow{10}{*}{\(\to\)} & \lstinline|true| if \lstinline|x| is comparatively greater than \lstinline|y| \\
+                    & & \lstinline|x >= y| & & \lstinline|true| if \lstinline|x| is comparatively greater than or equal to \lstinline|y| \\
+                    & & \lstinline|x <= y| & & \lstinline|true| if \lstinline|x| is comparatively less than or equal to \lstinline|y| \\
+                    & & \lstinline|x < y| & & \lstinline|true| if \lstinline|x| is comparatively less than \lstinline|y| \\
+                    & & \lstinline|x == y| & & \lstinline|true| if \lstinline|x| is \textit{equal} to \lstinline|y| (not to compare Data Structures\\
+                    & & \lstinline|x != y|    &  & Does the opposite of above\\
+                    & & \lstinline|x is y| & & \lstinline|true| if \lstinline|x| is \textit{identical} to \lstinline|y| (not to compare Data Structures)\\
+                    & & \lstinline|x is not y| & & Does the opposite of above\\
+                    & & \lstinline|x in y| & & \lstinline|true| if \lstinline|x| is an element within \lstinline|y|\\
+                    & & \lstinline|x not in y| & & Does the opposite of above\\\midrule
+                  5 & C. NOT            & \lstinline|not x|  & \(\to\) & Returns \lstinline|true| only if both conditions \lstinline|x| and \lstinline|y| are true.\\\midrule
+                  4 & C. AND            & \lstinline|x and y|& \(\to\) & Returns \lstinline|true| only if both conditions \lstinline|x| and \lstinline|y| are true.\\\midrule
+                  3 & C. OR             & \lstinline|x or y| & \(\to\) & Returns \lstinline|true| if either boolean \lstinline|x| or \lstinline|y| are true.\\\midrule
+                  2 & Ternary           & \lstinline|y if x else z| & \(\gets\) & Evaluates \lstinline|y| if boolean \lstinline|x| is true, else evaluates \lstinline|z|.\\\midrule
+                  1 & Lambda            & \lstinline|lambda x: y| & \(\gets\) & Create an anonymous function\\\midrule
+                  0 & Assignment        & \lstinline|x = y| & \(\gets\) & Includes all compound assignment operators\\\midrule
 \end{tabularx}\end{center}
 \subsection{Java}
 \begin{center}\begin{tabularx}{\textwidth}{clccX}\toprule
@@ -153,21 +158,20 @@ BL. (Bitwise-Logical) \dotfill Alters bits of primitives or booleans, depending 
                   5   & BL. OR            & \lstinline+x | y+     & \(\to\) & Returns 1 if either matching bit in numbers \lstinline|x| or \lstinline|y| is 1.\\\midrule
                   4   & C. AND            & \lstinline|x \&\& y|  & \(\to\) & Returns \lstinline|true| only if both booleans \lstinline|x| and \lstinline|y| are true.\\\midrule
                   3   & C. OR             & \lstinline+x || y+    & \(\to\) & Returns \lstinline|true| if either boolean \lstinline|x| or \lstinline|y| are true.\\\midrule
-                  2   & Ternary           & \lstinline|x ? y : z| & \(\gets\) & Executes \lstinline|y| if boolean \lstinline|x| is true, else executes \lstinline|y|.\\\midrule
+                  2   & Ternary           & \lstinline|x ? y : z| & \(\gets\) & Executes \lstinline|y| if boolean \lstinline|x| is true, else executes \lstinline|z|.\\\midrule
                   1   & Assignment        & \lstinline!x = y!     & \(\gets\) & Includes all compound assignment operators \\\midrule
-                  0   & Lambda / Switch   & \lstinline|x -> y|    & \(\gets\) & Define an anonymous function or script\\\bottomrule
+                  0   & Lambda / Switch   & \lstinline|x -> y|    & \(\gets\) & Create an anonymous function\\\bottomrule
 \end{tabularx}\end{center}
 
 \section{Containers}
 \subsection{Data Structures (Java)}
-Let \lstinline|T| and \lstinline|U| refer to the type of an object (i.e., \lstinline|float| or \lstinline|Integer|). Note that for data structures outside of Arrays, non-primitive types must be used.
-Note that any value related to index/sizes (\lstinline|int i|, \lstinline|int j|, or \lstinline|int n|), for these intents, cannot be negative since negative indices do not exist in Java.
+Let \lstinline|T| and \lstinline|U| refer to the type of an object (i.e., \lstinline|Float| or \lstinline|Integer|). Any value related to index/sizes (\lstinline|int i|, \lstinline|int j|), for these intents, cannot be negative since negative indices do not exist in Java. Note that only Arrays can utilize primitive data types; All other data structures must use wrapper classes.
 \setlength{\tabcolsep}{3pt}
 \begin{center}\begin{tabularx}{\textwidth}{llX}\toprule
   Name & Code & Description\\
   \multirow{3}{*}{Array} & \lstinline|T[] x = new T[n];| & Initialize an array \(x\) of size \(n\)\\
                          & \lstinline|x[i] = y;| & Set element of \(x\) at index \(i\) to \(y\)\\
-                         & \lstinline|n = x.length;| & Record the length of array \(x\) \\\midrule
+                         & \lstinline|x.length;| & Access the (constant) length of array \(x\) \\\midrule
   \multirow{12}{*}[-0.5em]{\lstinline|String|} & \lstinline|String x = "abc";| & Initialize a String \(x\) containing \enquote{abc}\\
                                          & \lstinline|x.charAt(i)| & Return character in \(x\) located at index \(i\)\\
                                          & \lstinline|x.compareTo(y)| & Compare strings \(x\) and \(y\) lexicographically; returns \(0\) if \(x\) equals \(y\), \(>\) if \(x\) is greater than \(y\), \(<0\) if \(x\) is lesser than \(y\)\\
@@ -179,8 +183,8 @@ Note that any value related to index/sizes (\lstinline|int i|, \lstinline|int j|
                                          & \lstinline|x.toUpperCase()| & Return \(x\) with all letters uppercased\\
                                          & \lstinline|x.toLowerCase()| & Return \(x\) with all letters lowercased\\
                                          & \lstinline|x.trim()| & Return \(x\) with whitespace removed from both ends\\
-                                         & \lstinline|x.substring(y, z)| & Return characters in \(x\) from index \(y\) before index \(z\) \\\midrule
-  \multirow{7}{*}[-0.5em]{\lstinline|ArrayList|} & \lstinline|List<T> x = new ArrayList<T>();| & Initialize an ArrayList \(x\) of \(T\)-typed objects\\
+                                         & \lstinline|x.substring(i, j)| & Return characters in \(x\) from index \(i\) before index \(j\) \\\midrule
+  \multirow{7}{*}[-0.5em]{\lstinline|ArrayList|} & \lstinline|List<T> x = new ArrayList<>();| & Initialize an ArrayList \(x\) of \(T\)-typed objects\\
                                          & \lstinline|x.add(y);| or \lstinline|x.add(i, y);| & Insert element \(y\) to \(x\) at index \(i\); if \(i\) is not given, then insert at the end of \(x\)\\
                                          & \lstinline|x.get(y)| & Return the element located at index \(i\) in \(x\) \\
                                          & \lstinline|x.remove(i);| & Return the element located at index \(i\) in \(x\), then delete it\\
@@ -209,4 +213,8 @@ Note that any value related to index/sizes (\lstinline|int i|, \lstinline|int j|
 
 %RED, WHITE, and BLUE Praise your exalted name.
 
+\vfill\raggedleft
+Written by Miraj Parikh\\
+Edited by Austin Song and Aiden Pham\\
+\oldpilcrowfive\LaTeX
 \end{document}
