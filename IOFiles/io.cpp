@@ -2,27 +2,30 @@
 using namespace std;
 
 int main() {
-  // --- INPUT ---
+  // Small input optimizations
+  cin.tie(NULL);
+  ios_base::sync_with_stdio(false);
 
-  // input an int N
+  // --- INPUT ---
+  // input int N
   int N;
   cin >> N;
 
-  // input an array a of characters of length N
+  // input array a of characters of length N
   char a[N];
   for (int i = 0; i < N; i++) {
     cin >> a[i];
   }
 
-  // input into a vector b of strings of size N
+  // input into vector b of strings of size N
   vector<string> b;
   for (int i = 0; i < N; i++) {
     string temp;
     cin >> temp;
-    b.push_back(temp);
+    b[i] = temp; // more optimal than b.push_back(temp)
   }
 
-  // input into a set c of integers of size N
+  // input into set c of unsigned integers of size N
   set<int> c;
   for (int i = 0; i < N; i++) {
     int temp;
@@ -31,31 +34,26 @@ int main() {
   }
 
   // --- OUTPUT ---
-
-  // output N twice, separated by a space, then output a newline
+  // output N twice, separated by space, then output newline
   cout << N << ' ' << N << '\n';
 
-  // output an array a of chars (spaced apart) w/ enhanced & regular forloops
-  for (int i = 0; i < N; i++) // N or a.length could be used here
+  // output array a of chars (spaced) w/ enhanced & regular forloops
+  for (int i = 0; i < N; i++) // N could be replaced by a.length
     cout << a[i] << ' ';
 
-  for (char u : a) {
+  for (char u : a)
     cout << u << ' ';
-  }
 
-  // output a vector b of strings (not spaced apart) w/ both forloops
-  for (int i = 0; i < b.size(); i++) {
-    cout << b[i]; // b.at(i) could be used but it is slower (yet 'safer')
-  }
+  // output vector b of strings (not spaced) w/ both forloops
+  for (int i = 0; i < b.size(); i++)
+    cout << b[i]; // b.at(i) could be used it is slower yet 'safer'
 
-  for (string u : b) {
+  for (string u : b)
     cout << u;
-  }
 
-  // output a set c of ints (sep. by newlines)
-  for (int u : c) {
+  // output set c of ints (sep. by newlines)
+  for (int u : c)
     cout << u << '\n';
-  }
 
   return 0;
 }

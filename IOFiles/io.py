@@ -1,32 +1,30 @@
+from sys import stdin, stdout
+
+scan = stdin.readline  # Faster execution than built-in input()
+scanAll = stdin.read  # Read ENTIRE input, not just a line
+out = stdout.write  # Faster execution than built-in print();
+# Note: out() does NOT automatically add a newline
+
 # --- INPUT ---
-import sys
+# input an integer n
+N = int(scan())
 
-input = sys.stdin.readline  # Faster execution than traditional input()
-inputAll = sys.stdin.read  # Read ENTIRE input, not just a line
-print = sys.stdout.write  # Faster execution than traditional print();
-# YOU MUST END THE print() ARGUMENT WITH A '\n'
+# input list a of integers; input separated by space, i.e. '2 4 6'
+a = [int(i) for i in scan().split(' ')]
 
-N = int(input())
-
-# input a list a of integers; input is separated by space, i.e. '1 1 2 3 5 8'
-a = [int(i) for i in input().split(' ')]
-
-# input a set b of strings of size N; input is separated by newline
+# input set b of size N; input separated by newline
 b = set()
-for i in range(0, N):
-    b.add(input())
+for i in range(0, N): # N can be replaced by len(b)
+    b.add(scan())
 
-# Read ENTIRE input and separate it by '\n'
-c = inputAll().split('\n')
+# Read ENTIRE input then separate by '\n' - newline
+c = scanAll().split('\n')
 
 # --- OUTPUT ---
+# output N twice, separated by space, then output newline
+out(str(n) + ' ' + str(n) + '\n')
 
-# output N twice, separated by a space, then output a newline
-print(str(N) + ' ' + str(N) + '\n')
-
-# output a list of strings (not spaced apart then spaced apart)
-print(''.join(a) + '\n')
-print(' '.join(a) + '\n')
-
-# output a set b of integers (sep. by newlines)
-print('\n'.join(b))
+# output containers (not spaced, then spaced, then by newline)
+out(''.join(a) + '\n')
+out(' '.join(b) + '\n')
+out('\n'.join(c))

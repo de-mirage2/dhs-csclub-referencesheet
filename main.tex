@@ -44,13 +44,23 @@
 
 \lstinputlisting[language=Java]{govikes.java}
 {\let\newpage\relax\maketitle} % snippet to maketitle w/out prefixing page
+This reference sheet includes vital information for programmers. Although Java, Python, and C-family code is explained
 \textbf{Contact Miraj Parikh if you have any questions or if you need any clarification on this reference sheet.}
 
-\renewcommand{\arraystretch}{1.25} % it hurts the eyes to keep numbers close together
+% \section{Glossary}
+%
+% \begin{center}\begin{tabularx}{\textwidth}{lcX}\toprule
+%   Term & Part of Speech & Description \\\midrule
+%   Boolean     & n. & True-or-False: \\\midrule
+%   Assignment  & a. & Compound assignment operators\\\midrule
+% \end{tabularx}\end{center}
+
+\renewcommand{\arraystretch}{1.2} % when the numbers are too close together it gives me a headache
 \section{Primitive Data Types (Java \& C-family)}
-Note that the C-family Character primitive actually has the same dimensions as a byte. Also note that all other primitives are \textit{signed} by default whereas the Character primitive is \textit{unsigned} by default.
+Exceptions: The C-family \lstinline|char| primitive actually has the same dimensions as a byte.
+For Java, all primitives are \textit{signed}.
 \begin{center}\begin{tabular}{lllr}\toprule
-  Name (Java Wrapper Class)      &Size (Bits) &Initialization              &Range \\\midrule
+  Name {\small (Java Wrapper Class)}      &Size (Bits) &Initialization              &Range \\\midrule
   Boolean   &1           &\lstinline|bool x;|           &True/False \\\midrule
   Byte      &8           &\lstinline|byte x;|           &\(-128 \leq x < 128\) \\
             &            &\lstinline|unsigned byte x;|  &\(0 \leq x < 256\) \\
@@ -240,7 +250,7 @@ Name & Code & Description\\\midrule
 & \lstinline|x.sort()| & Sort \(x\) in increasing (decreasing if \lstinline|reverse = True| is passed) order\\\midrule
 
 % String
-\multirow{10}{*}{String} & \lstinline|x.capitalize()| & Return string with first letter capitalized\\
+\multirow{7}{*}{String} & \lstinline|x.capitalize()| & Return string with first letter capitalized\\
 & \lstinline|x.split(y)| & Return \(x\) split by separators matching \(y\), which is whitespace by default\\
 & \lstinline|x.count(y)| & Return the count of appearances of \(y\) in \(x\)\\
 & \lstinline|x.find(y)| & Return the first index where \(y\) appears in \(x\); returns \(-1\) if not found\\
@@ -286,7 +296,7 @@ Let \lstinline|T| and \lstinline|U| refer to the type of an object (i.e., \lstin
 & \lstinline|x[i] = y;| & Set element of \(x\) at index \(i\) to \(y\)\\
 & \lstinline|x.length;| & Access the (constant) length of array \(x\) \\\midrule
 
-\multirow{2}{*}{General} & \lstinline|x.isEmpty()| & Returns a boolean indicating whether the container \(x\) is empty\\
+\multirow{3}{*}{General} & \lstinline|x.isEmpty()| & Returns a boolean indicating whether the container \(x\) is empty\\
 & \lstinline|x.size()| & Return the count of elements within \(x\)\\
 & \lstinline|x.clear();| & Remove all elements within \(x\) (Does not apply to \lstinline|String|)\\\midrule
 
@@ -302,7 +312,7 @@ Let \lstinline|T| and \lstinline|U| refer to the type of an object (i.e., \lstin
 & \lstinline|x.toUpperCase()| & Return \(x\) with all letters uppercased\\
 & \lstinline|x.toLowerCase()| & Return \(x\) with all letters lowercased\\
 & \lstinline|x.trim()| & Return \(x\) with whitespace removed from both ends\\
-& \lstinline|x.substring(i, j)| & Return characters in \(x\) from index \(i\) before index \(j\); if \(j\) is not given, then return characters in \(x\) from index \(i\) to the end\\\midrule
+& \lstinline|x.substring(i, j)| & Return a string of characters in \(x\) from index \(i\) to before index \(j\) (inclusive-exclusive); if \(j\) is not given, then \(j\) will equal the length, or \lstinline|x.length()|\\\midrule
 
 % ArrayList
 \multirow{4}{*}{\lstinline|ArrayList|} & \lstinline|List<T> x = new ArrayList<>();| & Initialize an ArrayList \(x\) of \(T\)-typed objects\\
@@ -311,7 +321,7 @@ Let \lstinline|T| and \lstinline|U| refer to the type of an object (i.e., \lstin
 & \lstinline|x.remove(i);| & Return before deleting the element located at index \(i\) in \(x\)\\\midrule
 
 % HashMap
-\multirow{8}{*}[-0.5em]{\lstinline|HashMap|} & \lstinline|Map<T, U> x = new HashMap<>();| & Initialize a HashMap \(x\) mapping \(T\)-typed to \(U\)-typed objects\\
+\multirow{7}{*}[-0.5em]{\lstinline|HashMap|} & \lstinline|Map<T, U> x = new HashMap<>();| & Initialize a HashMap \(x\) mapping \(T\)-typed to \(U\)-typed objects\\
 & \lstinline|x.put(y, z);| & Write entry \(y-z\) to \(x\), returning a boolean indicating if it \textit{wasn't} already in \(x\)\\
 & \lstinline|x.get(y)| & Return the value of the entry in \(x\) with a unique key \(y\)\\
 & \lstinline|x.getOrDefault(y, z)| & Return the value of the entry in \(x\) with a unique key \(y\); if there is no such entry, then return \(z\) by default.\\
@@ -320,15 +330,17 @@ Let \lstinline|T| and \lstinline|U| refer to the type of an object (i.e., \lstin
 & \lstinline|x.remove(y);| & Return before deleting the value of the entry in \(x\) with a unique key \(y\)\\\midrule
 
 % HashSet
-\multirow{4}{*}[-0.5em]{\lstinline|HashSet|} & \lstinline|Set<T> x = new HashSet<>();| & Initialize a HashSet \(x\) holding \(T\)-typed objects\\
+\multirow{4}{*}{\lstinline|HashSet|} & \lstinline|Set<T> x = new HashSet<>();| & Initialize a HashSet \(x\) holding \(T\)-typed objects\\
 & \lstinline|x.add(y);| & Add element \(y\) to \(x\), returning a boolean indicating if it \textit{wasn't} already in \(x\)\\
 & \lstinline|x.contains(y)| & Return a boolean indicating whether \(x\) contains the element \(y\)\\
 & \lstinline|x.remove(y);| & Delete the unique element \(y\) from \(x\)\\
-
 \bottomrule\end{tabularx}\end{center}
 
+\section{Common Tricks}
+
 \section{Other}
-\subsection{ASCII Chart (Relevant Characters)}
+\subsection{ASCII and Conversions}
+\subsubsection{Chart of Relevant Characters}
 \begin{center}\begin{tabular}{ccc!{\vrule width 1pt}ccc!{\vrule width 1pt}ccc!{\vrule width 1pt}ccc!{\vrule width 1pt}ccc}\toprule
 DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR \\ \hline
 32 & 20 & \texttt{ } & 51 & 33 & \texttt{3} & 70 & 46 & \texttt{F} & 89 & 59 & \texttt{Y} & 108 & 6C & \texttt{l} \\
@@ -339,18 +351,21 @@ DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC 
 37 & 25 & \texttt{\%} & 56 & 38 & \texttt{8} & 75 & 4B & \texttt{K} & 94 & 5E & \texttt{\textasciicircum} & 113 & 71 & \texttt{q} \\
 38 & 26 & \texttt{\&} & 57 & 39 & \texttt{9} & 76 & 4C & \texttt{L} & 95 & 5F & \texttt{\_} & 114 & 72 & \texttt{r} \\
 39 & 27 & \texttt{'} & 58 & 3A & \texttt{:} & 77 & 4D & \texttt{M} & 96 & 60 & \texttt{`} & 115 & 73 & \texttt{s} \\
-40 & 28 & \texttt{(} & 59 & 3B & \texttt{;} & 78 & 4E & \texttt{N} & 97 & 61 & \texttt{a} & 116 & 74 & \texttt{t} \\
+40 & 28 & \texttt{(} & 59 & 3B & \texttt{;} & 78 & 4E & \texttt{N} & \textbf{97} & \textbf{61} & \texttt{a} & 116 & 74 & \texttt{t} \\
 41 & 29 & \texttt{)} & 60 & 3C & \texttt{<} & 79 & 4F & \texttt{O} & 98 & 62 & \texttt{b} & 117 & 75 & \texttt{u} \\
 42 & 2A & \texttt{*} & 61 & 3D & \texttt{=} & 80 & 50 & \texttt{P} & 99 & 63 & \texttt{c} & 118 & 76 & \texttt{v} \\
 43 & 2B & \texttt{+} & 62 & 3E & \texttt{>} & 81 & 51 & \texttt{Q} & 100 & 64 & \texttt{d} & 119 & 77 & \texttt{w} \\
 44 & 2C & \texttt{,} & 63 & 3F & \texttt{?} & 82 & 52 & \texttt{R} & 101 & 65 & \texttt{e} & 120 & 78 & \texttt{x} \\
 45 & 2D & \texttt{-} & 64 & 40 & \texttt{@} & 83 & 53 & \texttt{S} & 102 & 66 & \texttt{f} & 121 & 79 & \texttt{y} \\
-46 & 2E & \texttt{.} & 65 & 41 & \texttt{A} & 84 & 54 & \texttt{T} & 103 & 67 & \texttt{g} & 122 & 7A & \texttt{z} \\
+46 & 2E & \texttt{.} & \textbf{65} & \textbf{41} & \texttt{A} & 84 & 54 & \texttt{T} & 103 & 67 & \texttt{g} & 122 & 7A & \texttt{z} \\
 47 & 2F & \texttt{/} & 66 & 42 & \texttt{B} & 85 & 55 & \texttt{U} & 104 & 68 & \texttt{h} & 123 & 7B & \texttt{\{} \\
-48 & 30 & \texttt{0} & 67 & 43 & \texttt{C} & 86 & 56 & \texttt{V} & 105 & 69 & \texttt{i} & 124 & 7C & \texttt{|} \\
+\textbf{48} & \textbf{30} & \texttt{0} & 67 & 43 & \texttt{C} & 86 & 56 & \texttt{V} & 105 & 69 & \texttt{i} & 124 & 7C & \texttt{|} \\
 49 & 31 & \texttt{1} & 68 & 44 & \texttt{D} & 87 & 57 & \texttt{W} & 106 & 6A & \texttt{j} & 125 & 7D & \texttt{\}} \\
 50 & 32 & \texttt{2} & 69 & 45 & \texttt{E} & 88 & 58 & \texttt{X} & 107 & 6B & \texttt{k} & 126 & 7E & \texttt{\textasciitilde} \\
 \bottomrule\end{tabular}\end{center}
+\subsubsection{ASCII tricks}
+In C-family languages, a character which represents a number (i.e., \lstinline|'8'|) can be substracted by \lstinline|'0'| to return its actual value.
+For example, in C++ with a defined string \lstinline|s| with an index \(i\), this would be \lstinline|s[i]-'0'|; and in Java,  \lstinline|s.charAt(i)-'0'|.
 \subsection{Set Logic Review (with analagous Python set operations)}
 % Definition of circles
 \def\firstcircle{(0,0) circle (1.5cm)}
@@ -362,8 +377,8 @@ DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC 
 \tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
     outline/.style={draw=circle edge, thick}}
 
-\setlength{\parskip}{5mm}
 \begin{center}
+\setlength{\parskip}{2mm}
 \begin{tikzpicture}
     \begin{scope}
         \clip \firstcircle;
@@ -372,21 +387,21 @@ DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC 
     \draw[outline] \firstcircle node {\(A\)};
     \draw[outline] \secondcircle node {\(B\)};
     \node[anchor=south,align=center] at (current bounding box.north)
-      {Intersection\\\(A \cap B\)\\\lstinline|x&y|};
+      {Intersection\\\(A \cap B\)\\\texttt{A AND B}\\\lstinline|x&y|};
 \end{tikzpicture}
 \qquad
 \begin{tikzpicture}
     \draw[filled, even odd rule]
       \firstcircle node {\(A\)} \secondcircle node{\(B\)};
     \node[anchor=south,align=center] at (current bounding box.north)
-      {Symmetric Difference\\\(A \oplus B\)\\\lstinline|x^y|};
+      {Symmetric Difference\\\(A \oplus B\)\\\texttt{A XOR B}\\\lstinline|x^y|};
 \end{tikzpicture}
 \qquad
 \begin{tikzpicture}
     \draw[filled]
       \firstcircle node {\(A\)} \secondcircle node {\(B\)};
     \node[anchor=south,align=center] at (current bounding box.north)
-      {Union\\\(A \cup B\)\\\lstinline+x|y+};
+      {Union\\\(A \cup B\)\\\texttt{A OR B}\\\lstinline+x|y+};
 \end{tikzpicture}
 \end{center}
 
@@ -429,6 +444,7 @@ DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC & HEX & CHAR & DEC 
 
 %RED, WHITE, and BLUE Praise your exalted name.
 
+\newpage
 \vfill\raggedleft
 Written by Miraj Parikh\\ % I wrote at least 95% of the code here
 Edited by Aiden Pham, Austin Song, and Chetan Gorantla\\
