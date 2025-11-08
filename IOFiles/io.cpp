@@ -11,13 +11,13 @@ int main() {
   int N;
   cin >> N;
 
-  // input array a of characters of length N
+  // input array `a` of characters of length N
   char a[N];
   for (int i = 0; i < N; i++) {
     cin >> a[i];
   }
 
-  // input into vector b of strings of size N
+  // input into vector `b` of strings of size N
   vector<string> b;
   for (int i = 0; i < N; i++) {
     string temp;
@@ -25,7 +25,7 @@ int main() {
     b[i] = temp; // more optimal than b.push_back(temp)
   }
 
-  // input into set c of unsigned integers of size N
+  // input into set `c` of unsigned integers of size N
   set<int> c;
   for (int i = 0; i < N; i++) {
     int temp;
@@ -46,7 +46,7 @@ int main() {
 
   // output vector b of strings (not spaced) w/ both forloops
   for (int i = 0; i < b.size(); i++)
-    cout << b[i]; // b.at(i) could be used it is slower yet 'safer'
+    cout << b[i]; // b.at(i) could be used, which is slower yet 'safer'
 
   for (string u : b)
     cout << u;
